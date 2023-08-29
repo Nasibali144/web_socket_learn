@@ -17,7 +17,7 @@ class SocketService {
    void connectSocketChannel ({Operations operation = Operations.subscribe,  Events event = Events.orderbook}) {
     final request = {
       "op": operation.name,
-      "args": [event.name],
+      "args": ["${event.name}:btc-usdt"],
     };
     if(Operations.unsubscribe != operation) {
       channel.sink.add(jsonEncode(request));
@@ -47,7 +47,7 @@ class SocketService {
       }
     );
 
-    return _stream.transform(streamTransformer).asBroadcastStream();
+    return _stream.transform(streamTransformer);
   }
 }
 
